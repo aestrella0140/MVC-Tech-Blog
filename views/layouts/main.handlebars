@@ -11,13 +11,23 @@
         Tech-Blog
     </hi>
     <nav>
-        <h1>
-            
-        </h1>
+       {{#if logged_in}}
+       <a href="/profile">profile</a>
+       <button class="not-button" id="logout">logout</button>
+       {{else}}
+       <a href="/login">login</a>
     </nav>
 </header>
-    
-{{{body}}}
+    <main>
+    {{{body}}}
+    </main>
+    <footer>
+
+    </footer>
+
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
 
 </body>
 </html>
