@@ -3,6 +3,7 @@ const { Posts, User } = require('../models');
 const withAuth = require('../utils/auth');
 // god get router
 router.get('/', async (req, res) => {
+    console.log('hello world');
 try {
     const postData = await Posts.findall({
         include: [
@@ -13,9 +14,10 @@ try {
         ],
     });
     
-    const Post = blogData.map((post) => post.get({ Plain: true }));
+    const Post = postData.map((post) => post.get({ Plain: true }));
 
-    res.render('dashboard', {
+    res.render('homepage', {
+        Post,
         logged_in: req.session.logged_in
     });
 } catch (err) {
@@ -71,7 +73,7 @@ router.get('/profile', withAuth, async (req, res) => {
 router.get('login', withAuth, async (req, res) => {
     if (req.sessionlogged_in) {
         res.redirect('/profile');
-        return
+        return;
     }
   res.render('login');  
 });

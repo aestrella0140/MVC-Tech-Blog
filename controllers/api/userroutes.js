@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
 // logged in post data
 router.post('/login', async (req, res) => {
     try {
-        const userData = await user.findOne({ where: { email: req.body.email } });
+        const userData = await User.findOne({ where: { email: req.body.email } });
 
         if (!userData) {
             res.status(400).json({ message: 'Incorrect email or password.' });
@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
 
 router.post('/login', (req, res) => {
     if (req.session.logged_in) {
-        req.session.destroy9(() => {
+        req.session.destroy(() => {
             res.status(204).end();
         });
     } else {

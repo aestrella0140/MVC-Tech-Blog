@@ -1,31 +1,33 @@
 <div>
     <h2>Login</h2>
-    <form class="form">
+    <form class="form login-form">
         <div class="form-together">
             <label>email:</label>
-            <input class="form-input" type="text" />
+            <input class="form-input" type="text" id="user-email"/>
             <div class="form-together">
                 <label>password:</label>
-                <input class="form-input" type="password" />
+                <input class="form-input" type="password" id="user-password"/>
             </div>
-            <div class="form-together"></div>
+            <div class="form-together">
+                <button class="btn btn-primary" type="submit">Login</button>
+            </div>
     </form>
 </div>
 <div class="form">
     <h2>Signup</h2>
 
-    <form class="form">
+    <form class="form signup-form">
         <div class="form-together">
-            <label for="name-sign">name:</label>
-            <input class="form-input" type="text" />
+            <label for="name-sign" >name:</label>
+            <input class="form-input" type="text" id="signup-name"/>
         </div>
         <div class="form-together">
-            <label for="email-sign">email:</label>
-            <input class="form-input" type="text" />
+            <label for="email-sign" id="user-email">email:</label>
+            <input class="form-input" type="text" id="signup-email"/>
         </div>
         <div class="form-together">
             <label for="password-sign">password:</label>
-            <input class="form-input" type="password" />
+            <input class="form-input" type="password" id="signup-password"/>
         </div>
         <div>
             <button class="btn-primary" type="submit">signup</button>
