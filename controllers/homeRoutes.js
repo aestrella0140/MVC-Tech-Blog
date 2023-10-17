@@ -3,26 +3,30 @@ const { Posts, User } = require('../models');
 const withAuth = require('../utils/auth');
 // god get router
 router.get('/', async (req, res) => {
-    console.log('hello world');
-try {
-    const postData = await Posts.findall({
-        include: [
-            {
-                model: User,
-                attributes: ['name'],
-            },
-        ],
-    });
-    
-    const Post = postData.map((post) => post.get({ Plain: true }));
+    console.log('first');
+    let postData;
+    try {
+        console.log('second');
+        postData = await Posts.findAll({
+            include: [
+                {
+                    model: User,
+                    attributes: ['name'],
+                },
+            ],
+           
+        });
+        console.log('adrian');
 
-    res.render('homepage', {
-        Post,
-        logged_in: req.session.logged_in
-    });
-} catch (err) {
-    res.status(500).json(err);
-}
+        const allPost = postData.map((post) => post.get({ plain: true }));
+
+        res.render('homepage', {
+            allPost,
+            logged_in: req.session.logged_in,
+        });
+    } catch (err) {
+        res.status(500).json({ message: 'not working' });
+    }
 });
 
 //TODO get by post id
@@ -31,22 +35,22 @@ try {
 router.get('post/:id', async (req, res) => {
     try {
         const postData = await Posts.findByPk(req.params.id, {
-           include: [
-            {
-                model: User,
-                attributes: ['name'],
-            },
-        ],
-    });
+            include: [
+                {
+                    model: User,
+                    attributes: ['name'],
+                },
+            ],
+        });
 
-    const Post = postData.get({ plain: true });
+        const post = postData.get({ plain: true });
 
-    res.render('Posts', {
-        ...Post,
-        logged_in: req.session.logged_in
-    });
+        res.render('Post', {
+            ...post,
+            logged_in: req.session.logged_in,
+        });
     } catch (err) {
-        res.status(505).json({ message: 'Couldnt get Post By id!'});
+        res.status(505).json({ message: 'Couldnt get Post By id!' });
     }
 });
 
@@ -58,24 +62,26 @@ router.get('/profile', withAuth, async (req, res) => {
             attributes: { exclude: ['password'] },
             include: [{ model: Posts }],
         });
-        const user = userData.get ({ plain: true });
+        const user = userData.get({ plain: true });
 
         res.render('profile', {
             ...user,
             logged_in: true
         });
     } catch (err) {
-        res.status(505).json({ message: 'Couldnt find user based on the session ID.'})
+        res.status(505).json({ message: 'Couldnt find user based on the session ID.' })
     }
 });
 
 //TODO get login redirect to dashboard
-router.get('login', withAuth, async (req, res) => {
-    if (req.sessionlogged_in) {
+router.get('/login', async (req, res) => {
+    if (req.session.logged_in) {
         res.redirect('/profile');
         return;
     }
-  res.render('login');  
+    console.log('login render before');
+    res.render('login');
+    console.log('login after');
 });
 
 module.exports = router;

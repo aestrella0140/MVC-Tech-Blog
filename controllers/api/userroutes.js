@@ -30,12 +30,20 @@ router.post('/login', async (req, res) => {
         if (!ValPassword) {
             res.status(400).json({ message: 'Incorrect email or password.' })
         }
+
+        req.session.save(() => {
+            req.session.user_id = userData.id;
+            req.session.logged_in = true;
+
+            res.json({ user: userData, message: 'you are now logged in!'});
+        });
+        
     } catch (err) {
         res.status(404).json(err);
     }
 });
 
-router.post('/login', (req, res) => {
+router.post('/logout', (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
             res.status(204).end();
