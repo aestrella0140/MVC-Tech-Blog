@@ -14,17 +14,22 @@ router.post('/', withAuth, async (req, res) => {
     }
 })
 
-router.post('/api/posts', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
     try {
-        const newPost = await Post.create({
-            title: title,
-            comment: comment,
-            date_created: date_created,
-            user_id: req.session.user_id,
+        const newPost = await Posts.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id,
+            },
         });
+
+        if (!newPost) {
+            res.status(404).json({ message: 'no post with that id!'});
+            return;
+        }
         res.status(200).json(newPost);
-    } catch {
-        res.status(500).json({ message: 'couldnt create new post!' })
+    } catch (err) {
+        res.status(500).json(err);
     }
 });
 

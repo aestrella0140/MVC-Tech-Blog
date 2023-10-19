@@ -15,9 +15,9 @@ const postFormHandler = async (event) => {
         });
 
         if (respnseData.ok) {
-            document.location.replace('/post');
+            document.location.replace('/profile');
         } else {
-            alert('Failed to create post');
+            console.log('Failed to create post');
         }
     }
 };
@@ -27,14 +27,14 @@ const deleteButtonHandler = async (event) =>{
     if (event.target.hasAttribute('data-id')) {
         const id = event.target.getAttribute('data-id');
 
-        const response = await fetch(`/api/post/${id}`, {
+        const response = await fetch(`/api/posts/${id}`, {
             method: 'DELETE',
         });
 
         if (response.ok) {
-            document.location.replace('/post');
+            document.location.replace('/profile');
         } else {
-            alert('failed to delete post');
+            console.log('failed to delete post');
         }
     }
 };

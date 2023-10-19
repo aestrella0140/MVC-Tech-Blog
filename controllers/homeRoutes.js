@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
                     attributes: ['name'],
                 },
             ],
-           
         });
         console.log('adrian');
 
@@ -32,7 +31,8 @@ router.get('/', async (req, res) => {
 //TODO get by post id
 
 
-router.get('post/:id', async (req, res) => {
+router.get('/post/:id', async (req, res) => {
+    console.log('step one post');
     try {
         const postData = await Posts.findByPk(req.params.id, {
             include: [
@@ -42,13 +42,15 @@ router.get('post/:id', async (req, res) => {
                 },
             ],
         });
+        console.log('steptwo post');
 
         const post = postData.get({ plain: true });
 
-        res.render('Post', {
+        res.render('post', {
             ...post,
             logged_in: req.session.logged_in,
         });
+        console.log('stepthree post');
     } catch (err) {
         res.status(505).json({ message: 'Couldnt get Post By id!' });
     }
@@ -74,14 +76,14 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 
 //TODO get login redirect to dashboard
-router.get('/login', async (req, res) => {
+router.get('/login', (req, res) => {
     if (req.session.logged_in) {
         res.redirect('/profile');
         return;
     }
-    console.log('login render before');
+    // console.log('login render before');
     res.render('login');
-    console.log('login after');
+    // console.log('login after');
 });
 
 module.exports = router;

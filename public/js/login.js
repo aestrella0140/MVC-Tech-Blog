@@ -1,5 +1,5 @@
 // for login
-const loginHandler = async (event) => {
+const loginFormHandler = async (event) => {
     event.preventDefault();
 
 
@@ -25,35 +25,37 @@ const loginHandler = async (event) => {
 
 // for signup
 
-const signupHandler = async (event) => {
+const signupFormHandler = async (event) => {
     event.preventDefault();
+    console.log('chapo');
 
     const name = document.querySelector('#signup-name').value.trim();
     const email = document.querySelector('#signup-email').value.trim();
     const password = document.querySelector('#signup-password').value.trim();
+ 
 
     if (name && email && password) {
-        console.log('sign up works')
+        console.log('sign up works');
         const response = await fetch('/api/users', {
             method: 'POST',
             body: JSON.stringify({ name, email, password }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
         });
 
+        
         if (response.ok) {
             document.location.replace('/profile');
+            console.log('stepthree');
         } else {
-            alert(response.statusText);
+            console.log('didnt login');
         }
     }
 };
 
 document
     .querySelector('.login-form')
-    .addEventListener('submit', loginHandler);
+    .addEventListener('submit', loginFormHandler);
 
 document
     .querySelector('.signup-form')
-    .addEventListener('submit', signupHandler);
+    .addEventListener('submit', signupFormHandler);
