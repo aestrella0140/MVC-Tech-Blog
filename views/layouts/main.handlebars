@@ -5,21 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech-Blog</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <div>
 
         <header id="nav">
-            <hi>
-                <a href="/">Tech-Blog</a>
-            </hi>
-            <nav>
+            <h1>
+                <a class="row" href="/">Tech-Blog</a>
+            </h1>
+            <nav id="nav">
                 {{#if logged_in}}
-                <a href="/profile">profile</a>
+                <a class="row" href="/homepage">profile</a>
                 <button class="not-button" id="logout">logout</button>
                 {{else}}
-                <a href="/login">login</a>
+                <a class="row" href="/login">login</a>
                 {{/if}}
             </nav>
         </header>
@@ -36,5 +37,4 @@
     {{/if}}
 
 </body>
-
 </html>

@@ -1,0 +1,50 @@
+* {
+    background-color: aquamarine;
+}
+
+h2 {
+    color: chocolate;
+}
+
+/*for login handlebars*/
+
+body {
+margin: 0px;
+padding: 0px;
+}
+
+.form {
+   border-style: solid; 
+   margin: 10px 500px 30px;
+   padding: 30px;
+}
+
+.form-together {
+   display: inline-flex;
+   display: grid;
+   justify-content: space-evenly;
+    margin: 0px;
+    padding: 10px;
+}
+
+.label {
+    color: crimson;
+    font-size: larger;
+}
+
+/*for main handle*/
+
+#nav {
+    display: flex;
+    justify-content: space-around;
+    margin: 12px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: rgb(160, 150, 139);
+}
+
+.row {
+    margin: 10px;
+    padding: 5px;
+    background-color: rgb(160, 150, 139);
+}

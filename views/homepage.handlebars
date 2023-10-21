@@ -1,16 +1,18 @@
+
+
 {{#each posts as |post|}}
 <div>
-    <div>
-        <h2>
-            <a href="/post/{{post.id}}">{{post.title}}</a>
-        </h2>
-        <p>Created by {{post.user.name}} on {{format_date post.date_created}}</p>
-    </div>
-    <div>
-        <p>{{post.comment}}</p>
-    </div>
+    <h2>
+    <a href="/post/{{post.id}}">{{post.title}}</a>
+    </h2>
+    <p>Created by {{post.user.title}} on {{format_date post.date_created}}</p>
+</div>
+<div>
+    <p>
+        {{post.Comment}}
+    </p>
 </div>
 {{/each}}
-
 </body>
+
 </html>
